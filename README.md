@@ -17,7 +17,7 @@ MYBLMusicSDK is available through [Swift Package Manager](https://swift.org/pack
    ```
    https://github.com/shadhin-music/MYBLMusicSPM-iOS
    ```
-3. Select version **1.0.2** or **Up to Next Major Version**
+3. Select version **1.0.8** or **Up to Next Major Version**
 4. Add **MYBLShadhinSDK** to your target
 5. Click **Add Package**
 
@@ -42,7 +42,6 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 ```swift
 override func remoteControlReceived(with event: UIEvent?) {
     if let event = event {
-        // Register event
         ShadhinBL.shared.eventRegister(with: event)
     }
 }
@@ -51,8 +50,6 @@ override func remoteControlReceived(with event: UIEvent?) {
 ## Usage
 
 Get the Music home controller by passing your root navigation controller. The mini player will always be visible from any controller.
-
-Pass the membership status value accordingly:
 
 ```swift
 ShadhinBL.shared.gotoHome(with: self.tabBarController, navigationController: self.navigationController!, membership: "silver")
@@ -129,8 +126,6 @@ In your project target under **Signing & Capabilities**, add **Background Modes*
 
 ## Maintainer Guide — Releasing a New Version
 
-Follow these steps every time a new feature is added to the source project.
-
 ### Step 1 — Rebuild XCFramework
 
 ```bash
@@ -139,60 +134,46 @@ cd "/path/to/BLMusiciOS"
 xcodebuild archive \
   -project Shadhin_BL.xcodeproj \
   -scheme Shadhin_BL \
-  -configuration Release \
   -destination "generic/platform=iOS" \
-  -archivePath /tmp/bl-archives/Shadhin_BL-iOS \
+  -archivePath output/Shadhin_BL.xcarchive \
   SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES
 
 xcodebuild archive \
   -project Shadhin_BL.xcodeproj \
   -scheme Shadhin_BL \
-  -configuration Release \
   -destination "generic/platform=iOS Simulator" \
-  -archivePath /tmp/bl-archives/Shadhin_BL-Simulator \
+  -archivePath output/Shadhin_BL-sim.xcarchive \
   SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES
 
-rm -rf MYBLShadhinSDK.xcframework
 xcodebuild -create-xcframework \
-  -framework /tmp/bl-archives/Shadhin_BL-iOS.xcarchive/Products/Library/Frameworks/Shadhin_BL.framework \
-  -framework /tmp/bl-archives/Shadhin_BL-Simulator.xcarchive/Products/Library/Frameworks/Shadhin_BL.framework \
-  -output MYBLShadhinSDK.xcframework
+  -framework output/Shadhin_BL.xcarchive/Products/Library/Frameworks/Shadhin_BL.framework \
+  -framework output/Shadhin_BL-sim.xcarchive/Products/Library/Frameworks/Shadhin_BL.framework \
+  -output output/Shadhin_BL.xcframework
 ```
 
 ### Step 2 — Zip and compute checksum
 
 ```bash
-rm -f MYBLShadhinSDK.xcframework.zip
-zip -r MYBLShadhinSDK.xcframework.zip MYBLShadhinSDK.xcframework -x "*.DS_Store"
+cd output
+zip -r MYBLShadhinSDK.xcframework.zip Shadhin_BL.xcframework
 swift package compute-checksum MYBLShadhinSDK.xcframework.zip
 ```
-
-Copy the checksum printed in Terminal.
 
 ### Step 3 — Create GitHub release
 
 ```bash
-gh release create 1.0.3 \
-  MYBLShadhinSDK.xcframework.zip \
+gh release create <version> \
+  output/MYBLShadhinSDK.xcframework.zip \
   --repo shadhin-music/MYBLMusicSPM-iOS \
-  --title "MYBLShadhinSDK 1.0.3" \
+  --title "<version>" \
   --notes "Description of what changed"
 ```
 
-### Step 4 — Update Package.swift
-
-Update the `url` and `checksum` in `Package.swift`:
-
-```swift
-url: "https://github.com/shadhin-music/MYBLMusicSPM-iOS/releases/download/1.0.3/MYBLShadhinSDK.xcframework.zip",
-checksum: "PASTE_NEW_CHECKSUM_HERE"
-```
-
-Then push:
+### Step 4 — Update Package.swift and README, then push
 
 ```bash
-git add Package.swift
-git commit -m "Release 1.0.3"
+git add Package.swift README.md
+git commit -m "Release <version>"
 git push
 ```
 
