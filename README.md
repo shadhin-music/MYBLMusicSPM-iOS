@@ -27,7 +27,7 @@
 https://github.com/shadhin-music/MYBLMusicSPM-iOS
 ```
 
-3. Select version **1.0.8** or **Up to Next Major Version**
+3. Select version **1.0.9** or **Up to Next Major Version**
 4. Add **MYBLShadhinSDK** to your target
 5. Click **Add Package**
 
@@ -138,6 +138,16 @@ ShadhinBL.shared.openPatch(
 )
 ```
 
+### Shorts
+
+```swift
+ShadhinBL.shared.openPatch(
+    patchID: FeatureType.SHORTS.rawValue,
+    navigationController: self.navigationController!,
+    tabController: self.tabBarController
+)
+```
+
 ### Radio
 
 ```swift
@@ -180,6 +190,9 @@ Under **Signing & Capabilities → Background Modes**, enable:
 ---
 
 ## Changelog
+
+### 1.0.9
+- Added `FeatureType.SHORTS` — opens the full-screen Shorts/Reels player via `openPatch`
 
 ### 1.0.8
 - Fixed NSRangeException crash in ShortsPlayerVC when returning from ChannelVC
