@@ -27,7 +27,7 @@
 https://github.com/shadhin-music/MYBLMusicSPM-iOS
 ```
 
-3. Select version **1.0.9** or **Up to Next Major Version**
+3. Select version **1.1.0** or **Up to Next Major Version**
 4. Add **MYBLShadhinSDK** to your target
 5. Click **Add Package**
 
@@ -190,6 +190,13 @@ Under **Signing & Capabilities → Background Modes**, enable:
 ---
 
 ## Changelog
+
+### 1.1.0
+- Operator-based paid-content gating: paid (`IsPaid`) content requires a subscription for non-premium users; premium bypasses
+- Home feed endpoint selected by operator — BL uses `GetHomeContentV2`, non-BL uses `GetHomeContentV2Paid`
+- Shorts locked for non-BL users without a subscription; unlock automatically after subscribing
+- Subscription screen lands on Digital Payment (non-BL) / Mobile Balance (BL); more reliable bKash payment-success detection
+- `operator` parameter added to content APIs (artist, album, playlist, track, podcast, reels)
 
 ### 1.0.9
 - Added `FeatureType.SHORTS` — opens the full-screen Shorts/Reels player via `openPatch`
