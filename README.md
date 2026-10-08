@@ -27,11 +27,9 @@
 https://github.com/shadhin-music/MYBLMusicSPM-iOS
 ```
 
-3. Select version **1.1.0** or **Up to Next Major Version**
+3. Select version **1.2.0** or **Up to Next Major Version**
 4. Add **MYBLShadhinSDK** to your target
 5. Click **Add Package**
-
-> **⚠️ Note:** `MYBLShadhinSDK` bundles **LNPopupController** internally. Do **not** add LNPopupController as a separate Swift Package or CocoaPod — it is already included. Adding it again can cause duplicate Objective-C class conflicts at runtime.
 
 ---
 
@@ -192,6 +190,12 @@ Under **Signing & Capabilities → Background Modes**, enable:
 ---
 
 ## Changelog
+
+### 1.2.0
+- Removed the bundled **LNPopupController** entirely — the mini-player is now a native UIKit overlay, eliminating the Objective-C class-collision risk for host apps (no more "don't add LNPopupController separately" caveat)
+- Mini-player parity with the old bar: artwork, play/pause, prev/next, a top progress line, and dismiss-on-pause
+- Cleaned ~60 compiler warnings; migrated deprecated `keyWindow`/`windows` usage to the scene API
+- Device binary size reduced (~9.6 MB → ~8.7 MB)
 
 ### 1.1.0
 - Operator-based paid-content gating: paid (`IsPaid`) content requires a subscription for non-premium users; premium bypasses

@@ -15,8 +15,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "MYBLShadhinSDK",
-            url: "https://github.com/shadhin-music/MYBLMusicSPM-iOS/releases/download/1.1.0/MYBLShadhinSDK.xcframework.zip",
-            checksum: "1353ce7f35fd50e99ebe0c9b529cb1efc6a5c18b94172052a0723e705b563253"
+            url: "https://github.com/shadhin-music/MYBLMusicSPM-iOS/releases/download/1.2.0/MYBLShadhinSDK.xcframework.zip",
+            checksum: "b0ec9e7ef033d4bec62b7d77d2d07a04ff113cd9682800c32b256ecb9f6937b9"
         )
     ]
 )
