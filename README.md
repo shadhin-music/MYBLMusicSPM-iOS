@@ -27,7 +27,7 @@
 https://github.com/shadhin-music/MYBLMusicSPM-iOS
 ```
 
-3. Select version **1.2.0** or **Up to Next Major Version**
+3. Select version **1.2.1** or **Up to Next Major Version**
 4. Add **MYBLShadhinSDK** to your target
 5. Click **Add Package**
 
@@ -190,6 +190,10 @@ Under **Signing & Capabilities → Background Modes**, enable:
 ---
 
 ## Changelog
+
+### 1.2.1
+- Fixed a crash when opening **Shorts** in a consumer app — a `LottieAnimationView` nib reference had a hardcoded module that didn't resolve under the SPM framework's module name
+- Fixed **video player fullscreen**: now fills and rotates to landscape reliably (works even in portrait-locked host apps), and restores the correct layout after exiting fullscreen
 
 ### 1.2.0
 - Removed the bundled **LNPopupController** entirely — the mini-player is now a native UIKit overlay, eliminating the Objective-C class-collision risk for host apps (no more "don't add LNPopupController separately" caveat)
