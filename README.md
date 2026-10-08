@@ -31,6 +31,8 @@ https://github.com/shadhin-music/MYBLMusicSPM-iOS
 4. Add **MYBLShadhinSDK** to your target
 5. Click **Add Package**
 
+> **⚠️ Note:** `MYBLShadhinSDK` bundles **LNPopupController** internally. Do **not** add LNPopupController as a separate Swift Package or CocoaPod — it is already included. Adding it again can cause duplicate Objective-C class conflicts at runtime.
+
 ---
 
 ## SDK Initialization
