@@ -27,7 +27,7 @@
 https://github.com/shadhin-music/MYBLMusicSPM-iOS
 ```
 
-3. Select version **1.2.1** or **Up to Next Major Version**
+3. Select version **1.2.2** or **Up to Next Major Version**
 4. Add **MYBLShadhinSDK** to your target
 5. Click **Add Package**
 
@@ -190,6 +190,9 @@ Under **Signing & Capabilities → Background Modes**, enable:
 ---
 
 ## Changelog
+
+### 1.2.2
+- Fixed **paid-content gating** that leaked paid songs as free (and hid the "Get Pro" badge) for non-premium users. The per-item `IsPaid` flag was being overwritten by the (usually null) response-level flag when building the song list, forcing every song to `isPaid = false` — which made the `isPaid && !isPremium` gate always unlock. Affected **Artist details** (including three-dot → *Goto Artist*), **Album**, and **Album songs** flows.
 
 ### 1.2.1
 - Fixed a crash when opening **Shorts** in a consumer app — a `LottieAnimationView` nib reference had a hardcoded module that didn't resolve under the SPM framework's module name
